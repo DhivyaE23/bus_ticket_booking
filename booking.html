@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 5px;
+            padding: 5px;
+            background-color: aliceblue;
+            color: #203b51;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d4e4f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0a5488;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    
+        <h1>Ticket Booking</h1>
+        <form id="form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="date">Travel Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+            <label for="from">From:</label>
+            <input type="text" id="from" name="from" required><br><br>
+            <label for="to">To:</label>
+            <input type="text" id="to" name="to" required><br><br>
+            <label for="seats">Number of Seats:</label>
+            <input type="number" id="seats" name="seats" min="1" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+       
+       <button onclick="window.location.href='confirmation.html'">Go to confirmation Page</button>
+  
+    
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function(event){
+        event.preventDefault();
+        let name=document.getElementById("name").value;
+        let email=document.getElementById("email").value;
+        let date=document.getElementById("date").value;
+        let from=document.getElementById("from").value; 
+        let to=document.getElementById("to").value;
+        let seats=document.getElementById("seats").value;   
+
+        const storedData = JSON.parse(localStorage.getItem("bookingData")) || [];
+
+        storedData.push({name,email,date,from,to,seats});
+        localStorage.setItem("bookingData",JSON.stringify(storedData));
+        alert("Ticket booked successfully!");
+        window.location.href = "confirmation.html";
+
+      });
+    </script>
+</body>
+</html>

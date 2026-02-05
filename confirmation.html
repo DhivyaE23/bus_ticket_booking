@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Display Page</title>
+  <style>
+    body{
+        background-color:  #e3effe;
+        border: #0a5488;
+    }
+    button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0a5488;
+      color: rgb(207, 217, 224);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Submitted Booking Data</h2>
+  <ul id="dataList"></ul>
+
+  <button onclick="window.location.href='booking.html'">Go back to Booking Page</button>
+  <button onclick="localStorage.clear(); location.reload();">
+  Clear All Bookings
+</button>
+
+
+  <script>
+    let storedData = JSON.parse(localStorage.getItem("bookingData")) || [];
+    let dataList = document.getElementById("dataList");
+
+    storedData.forEach((entry, index) => {
+      let li = document.createElement("li");
+      li.textContent = `Name: ${entry.name}, Email: ${entry.email}, Date: ${entry.date}, From: ${entry.from}, To: ${entry.to}, Seats: ${entry.seats}`;
+      dataList.appendChild(li);
+    });
+    if (storedData.length === 0) {
+     dataList.innerHTML = "<li>No bookings found</li>";
+    }
+
+  </script>
+</body>
+</html>
